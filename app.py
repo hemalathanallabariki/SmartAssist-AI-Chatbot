@@ -51,6 +51,9 @@ st.set_page_config(
 )
 
 st.title("🤖 SmartAssist AI")
+st.caption(
+    "Powered by Gemini 2.5 Flash + Tavily Live Search"
+)
 
 # -------------------------
 # SIDEBAR
