@@ -110,20 +110,23 @@ if prompt:
         web_context = ""
 
         if search_mode:
-
-            results = tavily.search(
-                query=prompt,
-                search_depth="advanced",
-                max_results=5
-            )
-
-            for item in results["results"]:
-
-                web_context += (
-                    f"Title: {item['title']}\n"
-                    f"Content: {item['content']}\n\n"
+            try:
+                results = tavily.search(
+                    query=prompt,
+                    search_depth="advanced",
+                    max_results=5
                 )
-                
+                st.sidebar.write("Search Results Found:", len(results["results"]))
+
+                for item in results["results"]:
+                    web_context += (
+                        f"Title: {item['title']}\n"
+                        f"URL: {item['url']}\n"
+                        f"Content: {item['content']}\n\n"
+                    )
+            except Exception:
+                web_context=""  
+                st.warning(f"Web search unavailable: {e}")    
         final_prompt = f"""
 {SYSTEM_PROMPT}
 
