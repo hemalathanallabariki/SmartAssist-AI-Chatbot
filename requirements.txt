@@ -1,4 +1,4 @@
-streamlit
+﻿streamlit
 google-generativeai
-tavily-python
 python-dotenv
+tavily-python
