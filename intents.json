@@ -1,0 +1,50 @@
+{
+  "intents": [
+
+    {
+      "tag": "greeting",
+      "patterns": ["Hi", "Hello", "Hey"],
+      "responses": ["Hello!", "Hi there!", "Hey!"]
+    },
+     {
+      "tag": "Machine learning",
+      "patterns": ["what is ml?",
+      "Explain Machine learning?"
+    ],
+      "responses": [""]
+    },
+
+    {
+      "tag": "python",
+      "patterns": [
+        "What is Python",
+        "Explain Python"
+      ],
+      "responses": [
+        "Python is a powerful programming language."
+      ]
+    },
+     {
+      "tag": "love",
+      "patterns": [
+        "hema loves?",
+        "who loves hema",
+        "Hema's favourite person"
+      ],
+      "responses": [
+        "Aniiiii"
+      ]
+    },
+
+    {
+      "tag": "datascience",
+      "patterns": [
+        "What is Data Science"
+      ],
+      "responses": [
+        "Data Science extracts insights from data."
+      ]
+    }
+
+  ]
+}
