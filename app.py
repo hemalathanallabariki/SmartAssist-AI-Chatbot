@@ -107,32 +107,13 @@ if prompt:
             )
 
         # Search only for current/recent topics
-        search_keywords = [
-            "latest",
-            "today",
-            "current",
-            "recent",
-            "news",
-            "2025",
-            "2026",
-            "trending",
-            "who won",
-            "stock price",
-            "breaking"
-        ]
-
-        use_search = any(
-            keyword in prompt.lower()
-            for keyword in search_keywords
-        )
-
         web_context = ""
 
-        if search_mode and use_search:
+        if search_mode:
 
             results = tavily.search(
                 query=prompt,
-                search_depth="basic",
+                search_depth="advanced",
                 max_results=5
             )
 
@@ -142,7 +123,7 @@ if prompt:
                     f"Title: {item['title']}\n"
                     f"Content: {item['content']}\n\n"
                 )
-
+                
         final_prompt = f"""
 {SYSTEM_PROMPT}
 
