@@ -124,7 +124,7 @@ if prompt:
                         f"URL: {item['url']}\n"
                         f"Content: {item['content']}\n\n"
                     )
-            except Exception:
+            except Exception as e:
                 web_context=""  
                 st.warning(f"Web search unavailable: {e}")    
         final_prompt = f"""
@@ -150,12 +150,24 @@ Instructions:
         with st.chat_message("assistant"):
 
             with st.spinner("Thinking..."):
+                try:
+                    response = model.generate_content(
+                        final_prompt
+                    )
 
-                response = model.generate_content(
-                    final_prompt
-                )
+                    bot_reply = response.text
 
-                bot_reply = response.text
+                except Exception as e:
+
+                    if "429" in str(e):
+                        bot_reply = (
+                            "⚠️ Gemini API rate limit reached. "
+                            "Please wait a few seconds and try again."
+                        )
+                    else:
+                        bot_reply = (
+                            "⚠️ Something went wrong while generating the response."
+                        )
 
                 st.markdown(bot_reply)
 
