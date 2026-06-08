@@ -56,14 +56,59 @@ st.title("🤖 SmartAssist AI")
 # SIDEBAR
 # -------------------------
 
-search_mode = st.sidebar.checkbox(
-    "Enable Live Web Search",
-    value=True
-)
+with st.sidebar:
 
-if st.sidebar.button("Clear Chat"):
-    st.session_state.messages = []
-    st.rerun()
+    st.title("🤖 SmartAssist")
+    
+    search_mode = st.toggle(
+        "🌐 Live Web Search",
+        value=True
+    )
+    col1, col2, col3 = st.columns(3)
+
+    with col1:
+        st.metric(
+            "Model",
+            "Gemini"
+        )
+
+    with col2:
+        st.metric(
+            "Search",
+            "ON" if search_mode else "OFF"
+        )
+
+    with col3:
+        st.metric(
+            "Messages",
+            len(st.session_state.get("messages", []))
+        )
+
+    st.markdown(
+        "AI Assistant powered by Gemini and Tavily"
+    )
+
+    st.divider()
+
+    
+
+    st.divider()
+
+    if st.button("🗑️ Clear Chat"):
+        st.session_state.messages = []
+        st.rerun()
+
+    st.divider()
+
+    st.info(
+        """
+        **Model:** Gemini 2.5 Flash
+        
+        **Search:** Tavily AI
+        
+        **Memory:** Last 20 messages
+        """
+    )
 
 # -------------------------
 # CHAT HISTORY
@@ -73,7 +118,13 @@ if "messages" not in st.session_state:
     st.session_state.messages = []
 
 for message in st.session_state.messages:
-    with st.chat_message(message["role"]):
+
+    avatar = "👤" if message["role"] == "user" else "🤖"
+
+    with st.chat_message(
+        message["role"],
+        avatar=avatar
+    ):
         st.markdown(message["content"])
 
 # -------------------------
@@ -91,7 +142,10 @@ if prompt:
         }
     )
 
-    with st.chat_message("user"):
+    with st.chat_message(
+        "user",
+        avatar="👤"
+    ):
         st.markdown(prompt)
 
     try:
@@ -116,7 +170,6 @@ if prompt:
                     search_depth="advanced",
                     max_results=5
                 )
-                st.sidebar.write("Search Results Found:", len(results["results"]))
 
                 for item in results["results"]:
                     web_context += (
@@ -147,7 +200,10 @@ Instructions:
 - Answer naturally like a human mentor.
 """
 
-        with st.chat_message("assistant"):
+        with st.chat_message(
+            "assistant",
+            avatar="🤖"
+        ):
 
             with st.spinner("Thinking..."):
                 try:
