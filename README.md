@@ -163,23 +163,6 @@ docker run -p 8501:8501 smartassist
 http://localhost:8501
 ```
 
----
-
-## 📸 Screenshots
-
-Add screenshots here after deployment:
-
-### Home Screen
-
-<img src="screenshots/home.png" width="800">
-
-### Chat Conversation
-
-<img src="screenshots/chat.png" width="800">
-
-### Live Web Search
-
-<img src="screenshots/search.png" width="800">
 
 ---
 
